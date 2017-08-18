@@ -23,7 +23,8 @@ face_encodings = []
 face_names = []
 process_this_frame = True
 
-flag = 0
+flag_xiaoming = 0
+flag_xuena = 0
 
 while True:
     # Grab a single frame of video
@@ -46,19 +47,30 @@ while True:
 
             if match[0]:
                 name = "Xiaoming.Ren"
-                if flag == 0:
+                if flag_xiaoming == 0:
                     os.system("say '欢迎任小明'")
-                flag = 30
+                flag_xiaoming = 30
+            elif flag_xiaoming > 0:
+                flag_xiaoming = flag_xiaoming - 1
+
+
 
 
             if match[1]:
                 name = "Xuena.Cao"
-                os.system("say '欢迎曹雪娜'")
+                if flag_xuena == 0:
+                    os.system("say '欢迎曹雪娜'")
+                flag_xuena = 30
+            elif flag_xuena > 0:
+                flag_xuena = flag_xuena - 1
 
-        if len(face_encodings) == 0 and flag > 0:
-            flag = flag - 1
-            face_names.append(name)
-    print flag
+        if len(face_encodings) == 0 :
+            if flag_xiaoming > 0:
+                flag_xiaoming = flag_xiaoming - 1
+            if flag_xuena > 0:
+                flag_xuena = flag_xuena - 1
+        #     face_names.append(name)
+    print "flag_xiaoming:{},flag_xuena:{}".format(flag_xiaoming,flag_xuena)
     process_this_frame = not process_this_frame
 
 
